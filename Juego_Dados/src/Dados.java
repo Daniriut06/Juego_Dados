@@ -15,6 +15,9 @@ public class Dados extends JFrame {
     ClsDado dado1, dado2;
     Random r = new Random();
     JLabel lblDado1, lblDado2;
+    int Lanzamientos, cenas;
+    JLabel lblLanzamientos;
+    JLabel lblCenas;
 
     public Dados() {
         setSize(600, 500);
@@ -45,7 +48,7 @@ public class Dados extends JFrame {
         lblTituloCenas.setBounds(160 + 2 * imgDado.getIconWidth(), 10, 100, 25);
         getContentPane().add(lblTituloCenas);
 
-        JLabel lblLanzamientos = new JLabel("0");
+        lblLanzamientos = new JLabel("0");
         lblLanzamientos.setBounds(30 + 2 * imgDado.getIconHeight(), 40, 100, 100);
         lblLanzamientos.setBackground(new Color(0, 0, 0));
         lblLanzamientos.setForeground(new Color(51, 255, 0));
@@ -54,7 +57,7 @@ public class Dados extends JFrame {
         lblLanzamientos.setFont(new Font("Tahoma", 1, 72));
         getContentPane().add(lblLanzamientos);
 
-        JLabel lblCenas = new JLabel("0");
+        lblCenas = new JLabel("0");
         lblCenas.setBounds(160 + 2 * imgDado.getIconHeight(), 40, 100, 100);
         lblCenas.setBackground(new Color(0, 0, 0));
         lblCenas.setForeground(new Color(51, 255, 0));
@@ -93,13 +96,27 @@ public class Dados extends JFrame {
     }
 
     private void iniciar() {
+        Lanzamientos = 0;
+        cenas = 0;
+        lblLanzamientos.setText("0");
+        lblCenas.setText("0");
 
     }
 
     private void lanzar() {
         dado1.lanzar(r);
         dado1.mostrar(lblDado1);
+        dado2.lanzar(r);
+        dado2.mostrar(lblDado2);
+        dado2.sonar();
+        Lanzamientos++;
+        lblLanzamientos.setText(String.valueOf(Lanzamientos));
 
+        if (dado1.getNumero() + dado2.getNumero() >= 11) {
+            cenas++;
+            lblCenas.setText(String.valueOf(cenas));
+
+        }
     }
 
 }
